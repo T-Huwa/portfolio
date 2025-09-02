@@ -1,82 +1,89 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Github, ExternalLink } from "lucide-react"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Github, ExternalLink } from "lucide-react";
 
 export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const categories = ["all", "mobile", "web", "backend", "embedded"]
+  // const categories = ["all", "mobile", "web", "backend", "embedded"];
+  const categories = ["all", "web", "backend"];
 
   const projects = [
     {
       id: 1,
-      title: "Veterinary Appointment System",
+      title: "E-Voter",
       category: "web",
-      image: "/placeholder.svg?height=400&width=600",
-      description: "A web-based system allowing farmers to book veterinary appointments with extension workers.",
-      technologies: ["Laravel", "Inertia.js", "React"],
+      image: "/images/projects/e-voter/1.png",
+      description:
+        "A blockchain-based web application for students at a university to vote for student council elections and other events.",
+      technologies: ["NextJs", "Node.js", "Solidity", "Firebase"],
       github: "#",
-      demo: "#",
+      demo: "/projects/e-voter",
     },
     {
       id: 2,
-      title: "Secondary School Timetable Generator",
-      category: "backend",
-      image: "/placeholder.svg?height=400&width=600",
-      description: "Python-based system to generate secondary school timetables based on teacher and class constraints.",
-      technologies: ["Python"],
+      title: "Secondary School Management System",
+      category: "web",
+      image: "/images/projects/school/1.png",
+      description:
+        "Secondary School mamangement system that to track student grades, fees payments and disciplinary incidents, with statistics and reports.",
+      technologies: ["FastApi", "NextJs", "PostgreSql"],
       github: "#",
-      demo: "#",
+      demo: "/projects/school",
     },
     {
       id: 3,
       title: "Group Loan Management System",
       category: "web",
-      image: "/placeholder.svg?height=400&width=600",
-      description: "System for managing group loans where members contribute different amounts but apply as a group.",
-      technologies: ["Laravel", "React", "MySQL"],
+      image: "/images/projects/loans/1.png",
+      description:
+        "System for managing group loans where members contribute different amounts but apply as a group.",
+      technologies: ["Php", "HTML", "MySQL"],
       github: "#",
-      demo: "#",
+      demo: "/projects/loans",
     },
     {
       id: 4,
-      title: "Emergency Alert Bracelet App",
-      category: "mobile",
-      image: "/placeholder.svg?height=400&width=600",
-      description: "Mobile app prototype that connects with an Arduino bracelet to monitor heart rate and send emergency alerts.",
-      technologies: ["Flutter", "Bluetooth", "Firebase"],
-      github: "#",
-      demo: "#",
+      title: "Feed Optimization System",
+      category: "backend",
+      image: "/images/projects/optifeed/1.jpg",
+      description:
+        "Python backend for system that calculates optimized feed mixtures based on nutrient requirements for broiler and layer chickens.",
+      technologies: ["Python", "Pandas"],
+      github: "https://github.com/T-Huwa/Optifeed-python",
+      demo: "/projects/optifeed",
     },
     {
       id: 5,
-      title: "Teaching Experience - Math & ICT",
-      category: "teaching",
-      image: "/placeholder.svg?height=400&width=600",
-      description: "Teaching IGCSE Mathematics and ICT at Mzuzu International Academy, including preparing lessons, assessments, and engaging activities.",
-      technologies: ["Mathematics", "ICT", "Cambridge IGCSE"],
+      title: "City Signs Management",
+      category: "web",
+      image: "/images/projects/city-signs/1.png",
+      description:
+        "Web based system for city council to manage maintainance of road and city signs, with integrated maps to show sign locations.",
+      technologies: ["Next.js", "Inertia", "Laravel", "SQLite"],
       github: "#",
-      demo: "#",
+      demo: "/projects/city-signs",
     },
     {
       id: 6,
-      title: "Feed Optimization Model",
-      category: "backend",
-      image: "/placeholder.svg?height=400&width=600",
-      description: "Python model calculating optimized feed mixtures based on nutrient requirements for TNC.",
-      technologies: ["Python", "Pandas"],
-      github: "#",
-      demo: "#",
+      title: "Extension Officer Appointment System",
+      category: "web",
+      image: "/images/projects/ulimi/1.png",
+      description:
+        "System that connects all types of farmers to relevant extension officers with appointment management.",
+      technologies: ["Php", "MySQL", "React"],
+      github: "",
+      demo: "/projects/ulimi",
     },
-  ]
+  ];
 
   const filteredProjects = projects.filter((project) =>
-    selectedCategory === "all" ? true : project.category === selectedCategory,
-  )
+    selectedCategory === "all" ? true : project.category === selectedCategory
+  );
 
   return (
     <section className="bg-black py-20">
@@ -97,7 +104,8 @@ export default function Portfolio() {
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          A selection of my recent work across various technologies and platforms
+          A selection of my recent work across various technologies and
+          platforms
         </motion.p>
         <div className="mb-12 flex flex-wrap justify-center gap-4">
           {categories.map((category) => (
@@ -131,11 +139,18 @@ export default function Portfolio() {
                         className="aspect-video w-full object-cover"
                       />
                       <div className="p-6">
-                        <h3 className="mb-2 text-xl font-semibold text-white">{project.title}</h3>
-                        <p className="mb-4 text-sm text-gray-400">{project.description}</p>
+                        <h3 className="mb-2 text-xl font-semibold text-white">
+                          {project.title}
+                        </h3>
+                        <p className="mb-4 text-sm text-gray-400">
+                          {project.description}
+                        </p>
                         <div className="mb-4 flex flex-wrap gap-2">
                           {project.technologies.map((tech, index) => (
-                            <span key={index} className="rounded-full bg-zinc-800 px-3 py-1 text-xs text-gray-300">
+                            <span
+                              key={index}
+                              className="rounded-full bg-zinc-800 px-3 py-1 text-xs text-gray-300"
+                            >
                               {tech}
                             </span>
                           ))}
@@ -166,8 +181,8 @@ export default function Portfolio() {
             ))}
           </AnimatePresence>
         </motion.div>
+        <div className="mt-8 pt-4">And, Of course, Many more...</div>
       </div>
     </section>
-  )
+  );
 }
-

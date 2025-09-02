@@ -90,13 +90,13 @@ export default function Hero() {
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center">
         {/* Circular Image */}
         <motion.div
-          className="mb-6 h-32 w-32 rounded-full overflow-hidden border-4 border-cyan-400"
+          className="mb-6 h-52 w-52 rounded-full overflow-hidden border-4 border-cyan-400"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
         >
           <img
-            src="/profile.jpg" // Replace with the actual path to your image
+            src="/images/mikodi.jpg"
             alt="Profile"
             className="h-full w-full object-cover"
           />
@@ -115,7 +115,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Full-Stack Developer & Technology Enthusiast
+          Full-Stack Developer & Technology Enthusiast, with a Bachelor's Degree
+          in ICT from Mzuzu University
         </motion.p>
         <motion.div
           className="mt-8 flex flex-wrap justify-center gap-3"

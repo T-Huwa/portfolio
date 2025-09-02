@@ -1,16 +1,24 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import { motion } from "framer-motion"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { motion } from "framer-motion";
 
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { ClockCircleOutlined, MailOutlined } from "@ant-design/icons"
-import { MapPin, Smartphone } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { ClockCircleOutlined, MailOutlined } from "@ant-design/icons";
+import { MapPin, Smartphone } from "lucide-react";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -22,7 +30,7 @@ const formSchema = z.object({
   message: z.string().min(10, {
     message: "Message must be at least 10 characters.",
   }),
-})
+});
 
 export default function Contact() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -32,16 +40,36 @@ export default function Contact() {
       email: "",
       message: "",
     },
-  })
+  });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    // send data to server
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      setStatus("submitting");
+      const response = await fetch("https://formspree.io/f/xkgvvavd", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      setStatus("error");
+    }
   }
 
   return (
     <section className="relative overflow-hidden bg-zinc-900 py-20">
       <div className="container relative z-10 mx-auto px-4">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,13 +77,18 @@ export default function Contact() {
           viewport={{ once: true }}
           className="mx-auto max-w-2xl text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold tracking-tighter sm:text-4xl">Get in Touch</h2>
+          <h2 className="mb-4 text-3xl font-bold tracking-tighter sm:text-4xl">
+            Get in Touch
+          </h2>
           <p className="mb-8 text-gray-400">
-          Are you interested in collaborating or have a project in mind? Let’s connect and explore how I can help turn your ideas into reality.
+            Are you interested in collaborating or have a project in mind? Let’s
+            connect and explore how I can help turn your ideas into reality.
           </p>
         </motion.div>
 
+        {/* Two-column layout */}
         <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2">
+          {/* Left Column - Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -99,6 +132,7 @@ export default function Contact() {
             </div>
           </motion.div>
 
+          {/* Right Column - Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -106,7 +140,10 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
                 <FormField
                   control={form.control}
                   name="name"
@@ -140,29 +177,61 @@ export default function Contact() {
                     <FormItem>
                       <FormLabel>Message</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="Tell me about your project..." className="min-h-[120px]" {...field} />
+                        <Textarea
+                          placeholder="Tell me about your project..."
+                          className="min-h-[120px]"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full">
-                  Send Message
+
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={status === "submitting"}
+                >
+                  {status === "submitting" ? "Sending..." : "Send Message"}
                 </Button>
+
+                {status === "success" && (
+                  <p className="text-green-400 text-sm text-center">
+                    ✅ Your message has been sent!
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-red-400 text-sm text-center">
+                    ❌ Something went wrong. Please try again.
+                  </p>
+                )}
               </form>
             </Form>
           </motion.div>
         </div>
       </div>
 
+      {/* Background grid effect */}
       <div className="absolute inset-0 z-0 opacity-30">
-        <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg
+          className="h-full w-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
           {Array.from({ length: 50 }).map((_, i) => (
-            <line key={i} x1={i * 2} y1="0" x2={i * 2} y2="100" stroke="cyan" strokeWidth="0.1" />
+            <line
+              key={i}
+              x1={i * 2}
+              y1="0"
+              x2={i * 2}
+              y2="100"
+              stroke="cyan"
+              strokeWidth="0.1"
+            />
           ))}
         </svg>
       </div>
     </section>
-  )
+  );
 }
-

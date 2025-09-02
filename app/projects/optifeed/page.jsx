@@ -15,81 +15,52 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import Link from "next/link";
 
-// Sample project data - replace with your actual project data
 const projectData = {
-  title: "E-Commerce Dashboard",
-  subtitle: "Modern admin panel for online retail management",
+  title: "Optifeed",
+  subtitle: "Chicken Feed Optimization System",
   description:
-    "A comprehensive e-commerce dashboard built with modern web technologies. This project provides retailers with powerful tools to manage inventory, track sales, analyze customer behavior, and optimize their online presence. The dashboard features real-time analytics, automated reporting, and seamless integration with popular payment gateways.",
+    "Optifeed is a system that allows a chicken farmer to find the best combination of the ingredients that they have in order to come up with the optimal feed mixture for the chickens",
   longDescription:
-    "This e-commerce dashboard was designed to solve the common problem of fragmented retail management tools. By consolidating inventory management, sales analytics, customer relationship management, and financial reporting into a single, intuitive interface, the platform helps small to medium-sized retailers streamline their operations and make data-driven decisions. The project emphasizes user experience design and performance optimization to ensure smooth operation even with large datasets.",
-  images: [
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop",
-  ],
-  techStack: [
-    "React",
-    "TypeScript",
-    "Next.js",
-    "Tailwind CSS",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "Redis",
-    "Stripe API",
-    "Chart.js",
-    "Framer Motion",
-  ],
-  role: "Full-Stack Developer & UI/UX Designer",
+    "Optifeed uses <a href='https://pandas.pydata.org/docs/' class='text-gray-200 bg-gray-400 rounded-md p-1'>pandas</a> python library ",
+  images: ["/images/projects/optifeed/1.jpg"],
+  techStack: ["FastApi", "SQLAlchemy", "SQLite", "Flutter"],
+  role: "Backend Developer",
   responsibilities: [
-    "Architected the entire frontend application using React and TypeScript",
-    "Designed and implemented RESTful APIs using Node.js and Express",
-    "Created responsive UI components and design system",
-    "Integrated payment processing with Stripe API",
-    "Implemented real-time data visualization with Chart.js",
-    "Optimized database queries and implemented caching strategies",
+    "Designed jwt authentication for the backend",
+    "Developed the feed optimization algorithm",
+    "developed REST APIs to be used by the frontend",
   ],
-  duration: "4 months",
-  teamSize: "3 developers",
+  duration: "6 months",
+  teamSize: "2 developers",
   status: "Completed",
   features: [
-    "Real-time inventory tracking",
-    "Advanced analytics dashboard",
-    "Customer relationship management",
-    "Automated report generation",
-    "Multi-payment gateway integration",
-    "Mobile-responsive design",
+    "Jwt-based authentication",
+    "User profile management",
+    "Feed optimization",
+    "Admin ingredient price adjustment",
   ],
-  challenges: [
-    "Implementing real-time data synchronization across multiple users",
-    "Optimizing performance with large datasets (10k+ products)",
-    "Creating an intuitive UX for complex financial data visualization",
-  ],
-  outcomes: [
-    "Reduced inventory management time by 60%",
-    "Improved sales reporting accuracy by 40%",
-    "Increased user engagement by 35%",
-  ],
-  liveUrl: "https://demo-ecommerce-dashboard.com",
-  githubUrl: "https://github.com/yourusername/ecommerce-dashboard",
-  category: "Web Application",
+  challenges: ["Developing feed optimization algorith"],
+  outcomes: ["Successfully deployed and tested feed optimization algorithm"],
+  liveUrl: "", //"http://localhost:3000", // replace with real deployed demo if available
+  githubUrl: "https://github.com/T-Huwa/Optifeed-python", //"https://github.com/t-huwa/e-voter", // replace with your repo link
+  category: "Optimization",
 };
 
 export default function ProjectView() {
-  const [selectedImage, setSelectedImage] = useState(0);
-
   return (
-    <div className="min-h-screen transition-all duration-500 bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:via-slate-900 dark:to-purple-950">
+    <div className="min-h-screen transition-all duration-500 bg-gray-900">
       {/* Navigation */}
       <nav className="backdrop-blur-xl border-b sticky top-0 z-50 transition-all duration-300 bg-white/80 border-slate-200 dark:bg-slate-900/80 dark:border-slate-800">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <button className="flex items-center gap-2 transition-all duration-300 hover:scale-105 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100">
+          <Link
+            href={"/"}
+            className="flex items-center gap-2 transition-all duration-300 hover:scale-105 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+          >
             <ChevronLeft className="w-5 h-5" />
             Back to Portfolio
-          </button>
+          </Link>
         </div>
       </nav>
 
@@ -127,28 +98,33 @@ export default function ProjectView() {
             </div>
 
             <div className="flex gap-4 z-10">
-              {projectData.liveUrl && (
-                <a
-                  href={projectData.liveUrl}
-                  className="group flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-2xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                  Live Demo
-                </a>
-              )}
-              {projectData.githubUrl && (
-                <a
-                  href={projectData.githubUrl}
-                  className="group flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 border-2 border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 hover:shadow-2xl dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:border-slate-600 dark:hover:shadow-2xl dark:hover:shadow-slate-700/25"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                  View Code
-                </a>
-              )}
+              <a
+                href={projectData.liveUrl || "#"}
+                className={`group flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold ${
+                  !projectData.liveUrl
+                    ? "disabled bg-gray-500"
+                    : "bg-blue-600 text-white hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 "
+                }`}
+                target={projectData.liveUrl && "_blank"}
+                rel="noopener noreferrer"
+              >
+                <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                Live Demo
+              </a>
+
+              <a
+                href={projectData.githubUrl || "#"}
+                className={`group flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold ${
+                  !projectData.githubUrl
+                    ? "disabled bg-gray-500 text-white"
+                    : "hover:bg-slate-50 hover:border-slate-400 hover:shadow-2xl dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:border-slate-600 dark:hover:shadow-2xl dark:hover:shadow-slate-700/25 transition-all duration-300 hover:scale-105 border-2 border-slate-300 text-slate-700"
+                }`}
+                target={projectData.githubUrl && "_blank"}
+                rel="noopener noreferrer"
+              >
+                <Github className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                View Source
+              </a>
             </div>
           </div>
         </div>
@@ -163,34 +139,14 @@ export default function ProjectView() {
           </div>
           <div className="rounded-3xl p-8 shadow-2xl border backdrop-blur-sm transition-all duration-300 bg-white/70 border-slate-200 shadow-slate-300/50 dark:bg-slate-800/40 dark:border-slate-700 dark:shadow-slate-900/50">
             {/* Main Image */}
-            <div className="mb-8 relative group">
+            <div className="mb-8 relative group flex justify-center">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <img
-                src={projectData.images[selectedImage]}
-                alt={`${projectData.title} screenshot ${selectedImage + 1}`}
-                className="w-full h-[500px] object-cover rounded-2xl shadow-xl transition-transform duration-300 group-hover:scale-[1.02]"
+                src={projectData.images[0]}
+                alt={`${projectData.title} screenshot`}
+                className="max-h-[500px] w-auto max-w-full object-contain rounded-2xl shadow-xl transition-transform duration-300 group-hover:scale-[1.02]"
+                loading="eager"
               />
-            </div>
-
-            {/* Thumbnail Navigation */}
-            <div className="flex gap-4 overflow-x-auto pb-2">
-              {projectData.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`flex-shrink-0 w-24 h-20 rounded-xl overflow-hidden border-3 transition-all duration-300 hover:scale-110 ${
-                    selectedImage === index
-                      ? "border-blue-500 ring-4 ring-blue-200 shadow-lg shadow-blue-500/30 dark:border-purple-400 dark:ring-purple-400/30 dark:shadow-purple-400/30"
-                      : "border-slate-300 hover:border-slate-400 dark:border-slate-600 dark:hover:border-slate-500"
-                  }`}
-                >
-                  <img
-                    src={image}
-                    alt={`Thumbnail ${index + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  />
-                </button>
-              ))}
             </div>
           </div>
         </div>
@@ -207,7 +163,19 @@ export default function ProjectView() {
                 {projectData.description}
               </p>
               <p className="leading-relaxed text-lg text-slate-600 dark:text-slate-300">
-                {projectData.longDescription}
+                The user specifies the age of their chickens along with the type
+                (broilers or layers) and the ingredient that are accessible to
+                them. Optifeed then uses{" "}
+                <a
+                  target="_blank"
+                  href="https://pandas.pydata.org/docs/"
+                  className="text-gray-200 bg-gray-700 hover:bg-gray-400 rounded-md p-1"
+                >
+                  pandas
+                </a>
+                , a python library, to find the cheapest mixture ratios for the
+                farmer's ingredients in order to save costs while keeping the
+                chickens healthy.
               </p>
             </div>
 
@@ -354,38 +322,6 @@ export default function ProjectView() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-20 rounded-3xl p-12 text-center shadow-2xl backdrop-blur-sm transition-all duration-300 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 dark:from-blue-900/60 dark:via-purple-900/60 dark:to-pink-900/60 dark:border dark:border-purple-700">
-          <div className="relative z-10">
-            <h2 className="text-4xl lg:text-5xl font-black text-white mb-6 bg-gradient-to-r from-white to-purple-100 bg-clip-text text-transparent">
-              Let's Create Something Amazing
-            </h2>
-            <p className="text-xl mb-10 max-w-3xl mx-auto leading-relaxed text-blue-100">
-              I'm passionate about turning innovative ideas into exceptional
-              digital experiences. Ready to bring your vision to life with
-              cutting-edge technology and creative design.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="group bg-white text-purple-600 px-10 py-4 rounded-2xl font-bold hover:bg-purple-50 transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg">
-                <span className="flex items-center gap-3">
-                  Start a Project
-                  <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                </span>
-              </button>
-              <button className="group border-2 border-white text-white px-10 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all duration-300 hover:scale-105 backdrop-blur-sm">
-                <span className="flex items-center gap-3">
-                  View More Work
-                  <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                </span>
-              </button>
-            </div>
-          </div>
-          {/* Floating Elements */}
-          <div className="absolute top-6 left-6 w-16 h-16 bg-white/10 rounded-full blur-lg"></div>
-          <div className="absolute bottom-8 right-8 w-12 h-12 bg-purple-300/20 rounded-full blur-md"></div>
-          <div className="absolute top-1/2 left-8 w-8 h-8 bg-blue-300/30 rounded-full blur-sm"></div>
         </div>
       </div>
     </div>
